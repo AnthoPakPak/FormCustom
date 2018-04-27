@@ -1,7 +1,7 @@
 ## FormCustom
 
 Not a fork but modified version of awesome [Form](https://github.com/hyperoslo/Form) with a few improvements, containing : 
-- Show/Hide groups (no animation, just adds section to collectionView then reload)
+- Show/Hide groups (can be animated or not)
 - Add AutoComplete field, based on Popover (named FORMDropdownFieldCell) and "dropdown" in json
 - Ability to add an extra field name in json ("title_custom"), that can be display in validation error message for example. This way you can customize field name from json without changing it's title in form
 - Fix really annoying crash when perform show target while group below is visible (difficult to reproduce, easier on iPad)
