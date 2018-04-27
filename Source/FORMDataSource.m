@@ -1108,18 +1108,47 @@ includingHiddenFields:(BOOL)includingHiddenFields
 
 
 
-//USAGE from controller managing Form : [self.dataSource show:show groupAtIndex:3]; [self.collectionView reloadData];
-//reloadData should be called here, but as I show/hide many groups at one time, I preferred to call it from controller
--(void) show:(BOOL)show groupAtIndex:(NSInteger)indexToHide {
-    FORMGroup *groupToHide = self.formData.allGroupsIncludingHiddenOnes[indexToHide];
+/**
+ Show / Hide a group by index in collection
+ If animated set to YES, it will animate insertion/deletion if possible, if not, it will just reloadData (for example, animating removal while collectionView is loading is not possible)
+ 
+ USAGE from controller managing Form : [self.dataSource show:show groupAtIndex:3 animated:YES];
+
+ @param show show/hide the group
+ @param indexToShowHide index of the group to show/hide
+ @param animated animate the insertion/deletion (could fallback to no animation if needed)
+ */
+-(void) show:(BOOL)show groupAtIndex:(NSInteger)indexToShowHide animated:(BOOL)animated {
+    FORMGroup *groupToHide = self.formData.allGroupsIncludingHiddenOnes[indexToShowHide];
+    
+    BOOL alreadyHiddenShowed = show != groupToHide.hidden;
+    if (alreadyHiddenShowed) //group already has targeted state
+        return;
+    
     groupToHide.hidden = !show;
     
+    NSInteger calculatedIndexToHide = indexToShowHide; //only needed for animating : need to decrement already hidden groups for deleteSections
     if ([self.formData.allGroupsIncludingHiddenOnes count] > 0) {
         [self.formData.groups removeAllObjects];
         [self.formData.groups addObjectsFromArray:self.formData.allGroupsIncludingHiddenOnes];
         for (FORMGroup *group in self.formData.allGroupsIncludingHiddenOnes) {
-            if (group.hidden)
+            if (group.hidden) {
                 [self.formData.groups removeObject:group];
+                
+                if ([self.formData.allGroupsIncludingHiddenOnes indexOfObject:group] < indexToShowHide && group.hidden) {
+                    calculatedIndexToHide--;
+                }
+            }
+        }
+    }
+    
+    if (!animated) {
+        [self.collectionView reloadData];
+    } else {
+        if (show) {
+            [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:indexToShowHide]];
+        } else {
+            [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:calculatedIndexToHide]];
         }
     }
 }

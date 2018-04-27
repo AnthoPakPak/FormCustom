@@ -256,6 +256,6 @@ includingHiddenFields:(BOOL)includingHiddenFields
 
 //ANTHO
 - (void)fieldCell:(UICollectionViewCell *)fieldCell updatedWithField:(FORMField *)field;
--(void) show:(BOOL)show groupAtIndex:(NSInteger)indexToHide;
+-(void) show:(BOOL)show groupAtIndex:(NSInteger)indexToHide animated:(BOOL)animated;
 
 @end
