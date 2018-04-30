@@ -143,7 +143,27 @@ static const NSInteger FORMSelectMaxItemCount = 6;
     [self showOrUpdatePopoverFromSender:sender];
 }
 
+/**
+ Gère les cas où l'utilisateur tape manuellement dans le textField une valeur qui existe dans les values, et le cas où il tape manuellement pour rentrer quelque chose qui n'existe pas dans les values
+ */
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    BOOL valueContainedInPopover = NO;
+    for (FORMFieldValue *fieldValue in valuesSave) {
+        if ([fieldValue.title isEqualToString:textField.text]) { //saisie à la main, sans sélectionner dans le popover
+            self.field.value = fieldValue;
+            valueContainedInPopover = YES;
+            break;
+        }
+    }
+    
+    if (!valueContainedInPopover) { //value écrite n'est pas contenue dans field.values
+        FORMFieldValue *fieldValue = [FORMFieldValue new];
+        fieldValue.valueID = textField.text;
+        fieldValue.title = textField.text;
+        fieldValue.field = self.field;
+        self.field.value = fieldValue;
+    }
+    
     [_fieldValuesController dismissViewControllerAnimated:YES completion:nil];
 }
 
