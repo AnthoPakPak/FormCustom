@@ -241,6 +241,7 @@ static NSString * const FORMFormatterSelector = @"formatString:reverse:";
     if ([typeString isEqualToString:@"text"] ||
         [typeString isEqualToString:@"name"] ||
         [typeString isEqualToString:@"email"] ||
+        [typeString isEqualToString:@"ibanFR"] ||
         [typeString isEqualToString:@"password"]) {
         return FORMFieldTypeText;
     } else if ([typeString isEqualToString:@"select"]) {

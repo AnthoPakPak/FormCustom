@@ -14,6 +14,7 @@
         case FORMTextFieldInputTypeEmail       : [self setupEmailTextField:textField]; break;
         case FORMTextFieldInputTypePassword    : [self setupPasswordTextField:textField]; break;
         case FORMTextFieldInputTypeCount       : [self setupCountTextField:textField]; break;
+        case FORMTextFieldInputTypeIBAN        : [self setupUpperCaseTextField:textField]; break;
         case FORMTextFieldInputTypeUnknown     : [self setupDefaultTextField:textField]; break;
     }
 }
@@ -80,6 +81,13 @@
     textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.keyboardType = UIKeyboardTypeNumberPad;
+    textField.secureTextEntry = NO;
+}
+
+- (void)setupUpperCaseTextField:(UITextField *)textField {
+    textField.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.keyboardType = UIKeyboardTypeDefault;
     textField.secureTextEntry = NO;
 }
 

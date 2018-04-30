@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, FORMTextFieldType) {
     FORMTextFieldTypeSelect,
     FORMTextFieldTypeDate,
     FORMTextFieldTypeCount,
+    FORMTextFieldTypeIBAN,
     FORMTextFieldTypeUnknown
 };
 
@@ -30,6 +31,7 @@ typedef NS_ENUM(NSInteger, FORMTextFieldInputType) {
     FORMTextFieldInputTypeEmail,
     FORMTextFieldInputTypePassword,
     FORMTextFieldInputTypeCount,
+    FORMTextFieldInputTypeIBAN,
     FORMTextFieldInputTypeUnknown
 };
 
