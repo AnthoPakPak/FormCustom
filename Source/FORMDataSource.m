@@ -1116,7 +1116,7 @@ includingHiddenFields:(BOOL)includingHiddenFields
 
  @param show show/hide the group
  @param indexToShowHide index of the group to show/hide
- @param animated animate the insertion/deletion (could fallback to no animation if needed)
+ @param animated animate the insertion/deletion
  */
 -(void) show:(BOOL)show groupAtIndex:(NSInteger)indexToShowHide animated:(BOOL)animated {
     FORMGroup *groupToHide = self.formData.allGroupsIncludingHiddenOnes[indexToShowHide];

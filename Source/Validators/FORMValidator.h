@@ -10,6 +10,8 @@ typedef NS_ENUM(NSInteger, FORMValidationResultType) {
     FORMValidationResultTypeInvalidFormat,
     FORMValidationResultTypeInvalidPostalCode,
     FORMValidationResultTypeInvalidSSN,
+    FORMValidationResultTypeInvalidNotMajor, //date birth mineur
+    FORMValidationResultTypeInvalidNotMajorConjoint, //date birth mineur conjoint
     FORMValidationResultTypeInvalidTooLong,
     FORMValidationResultTypeInvalidTooShort,
     FORMValidationResultTypeInvalidValueMissing
@@ -26,5 +28,7 @@ typedef NS_ENUM(NSInteger, FORMValidationResultType) {
                                 withComparator:(NSString *)comparator;
 
 + (Class)classForKey:(NSString *)key andType:(NSString *)type;
+
++(BOOL) isCustomValidator:(FORMValidationResultType)validationType;
 
 @end

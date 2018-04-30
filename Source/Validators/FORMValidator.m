@@ -126,4 +126,11 @@
     return validatorClass;
 }
 
+
++(BOOL) isCustomValidator:(FORMValidationResultType)validationType {
+    BOOL isCustomValidator = validationType == FORMValidationResultTypeInvalidNotMajor || validationType == FORMValidationResultTypeInvalidNotMajorConjoint;
+    
+    return isCustomValidator;
+}
+
 @end
